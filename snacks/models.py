@@ -5,12 +5,16 @@ from django.urls import reverse
 # Create your models here.
 
 class Snack(models.Model):
-    name = models.CharField(max_length=64)
-    description = models.TextField(default="")
+
+    title = models.CharField(max_length=256)
+
     purchaser = models.ForeignKey(get_user_model(), on_delete=models.CASCADE)
+
+    description = models.TextField(max_length = 256 , default="")
+    
 
     def __str__(self) -> str:
         return self.name
 
     def get_absolute_url(self):
-        return reverse('snack_details', args=[str(self.id)])
+        return reverse('snack_details')
